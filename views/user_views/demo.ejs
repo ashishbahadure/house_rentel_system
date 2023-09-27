@@ -1,0 +1,30 @@
+<form action="/test" method="post" >
+    <div id="form1"  style="display:inline-block">
+        <input type="text" name="name" value="avinash">
+    <button type="button" id="next" onclick="show()">Next</button>
+    </div>
+    <div id="form2"    style="display:none;">
+        <input type="text" name="mobile" value="7057496577">
+        <button >save</button>
+
+    </div>
+
+</form>
+
+<script>
+    var check=1;
+    function show(){
+        form1 = document.getElementById("form1");
+        form2 = document.getElementById("form2");
+        if(check){
+            form2.style.display='inline-block';
+            form1.style.display='none';
+            check=0;
+        }
+        else{
+            form2.style.display='none';
+            form1.style.display='inline-block';
+            check=1;
+        }
+    }
+</script>

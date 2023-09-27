@@ -1,0 +1,198 @@
+<%- include("navbar.ejs") %>
+<form action="save_posted_room" method="post" enctype="multipart/form-data" class="room_form">
+<div class="container p-5" id="form1" style="display:block">
+
+    <!-- IMP -->
+    <input type="hidden" value="shared" name="room_type" />
+    <input type="hidden" value="" id="posted_date" name="posted_on" />
+    <script>
+        date = new Date();
+        m = date.getMonth()+1;
+        d = date.getDate();
+        dt = date.getFullYear()+"-"+(m<10?"0"+m:m)+"-"+(d<10?"0"+d:d);
+        $('#posted_date').val(dt);
+     </script>
+
+    <div class="row  p-md-5 p-sm-4 p-3  mt-5 shadow rounded-3">
+        <div class="col-md-6  col-6 mt-3">
+            <label>Property Type</label>
+            <select name="property_type" class="form-control text-secondary">
+                <option>Flat</option>
+                <option>Independent House</option>
+            </select>
+        </div>
+        <div class="col-md-6 col-6 mt-3">
+            <label>Available From</label>
+            <input type="date" name="available_from" id="available_from" class="form-control" required/>
+        </div>
+        <div class="col-md-4 col-6 mt-3">
+            <label>Rent</label>
+            <input type="number" name="rent" id="rent" placeholder="eg. &#8377;2000" class="form-control" required/>
+        </div>
+        <div class="col-md-4 col-6 mt-3">
+            <label>Deposit</label>
+            <input type="number" name="deposit" id="deposit" placeholder="eg. &#8377;2000" class="form-control" required/>
+        </div>
+        <div class="col-md-4 col-12 mt-3">
+            <label>Electricity </label><span style="font-size: 14px;"> (If included in Rent enter 0)</span>
+            <input  type="number" name="electricity" id="electricity" placeholder="eg. &#8377;5 per unit" class="form-control ps-2 text-secondary">
+        </div>
+        
+        <div class="col-md-4 col-12 mt-3">
+            <label>Current Occupancy</label>
+            <input type="number" name="current_occupancy"  placeholder="How many peoples living already.." class="form-control" required/>
+        </div>
+        <div class="col-md-4 col-6 mt-3">
+            <label>Preference to</label>
+            <select name="preference" class="form-control" required>
+                <option>Boys</option>
+                <option selected>Any</option>
+                <option>Girls</option>
+            </select>
+        </div>
+        <div class="col-md-4 col-6 mt-3">
+            <label>Available Occupancy</label>
+            <input type="number" name="available_occupancy"  placeholder="" class=" form-control" required/>
+        </div>
+        
+        <div class="col-12 mt-3">
+            <label>Room Description</label>
+            <textarea name="room_desc" class="form-control" style="height:100px"></textarea>
+        </div>
+    </div>
+
+
+    <div class="row  p-md-5 mt-5 p-sm-4 p-3  shadow rounded-3">
+        <div class="col-12">
+            <h3 class="fw-bold">Property Rules</h3><br>
+        </div>
+        <div class="col-md-4 col-6 ps-5  text-secondary form-check">
+            <label class="fs-4 d-inline-block"><input type="checkbox" class="form-check-input" name="no_smoking"/> No-smoking </label>
+        </div>
+        <div class="col-md-4 col-6 ps-5  text-secondary form-check">
+            <label class="fs-4 d-inline-block"><input type="checkbox" class="form-check-input" name="no_drinking"/> No-drinking </label>
+        </div>
+        <div class="col-md-4 col-6 ps-5  text-secondary form-check">
+            <label class="fs-4 d-inline-block"><input type="checkbox" class="form-check-input" name="no_pets"/> No-pets </label>
+        </div>
+        <div class="col-md-4 col-6 ps-5  text-secondary form-check">
+            <label class="fs-4 d-inline-block"><input type="checkbox" class="form-check-input" name="vegetarian"/> Vegetarian </label>
+        </div>
+        <div class="col-md-4 col-6 ps-5  text-secondary form-check">
+            <label class="fs-4 d-inline-block"><input type="checkbox" class="form-check-input" name="no_visitors"/> No visitors </label>
+        </div>
+
+        <div class="col-12 text-end ">
+            <button class="btn btn-outline-success fw-bold ps-3 pe-3" id="next_btn" type="button" >Next</button>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="form2"  style="display:none">
+    <div class="row">
+        <div class="col-md-6">
+			<h2>Address Details</h2><hr>
+			<div class="row p-5">
+				<div class="col-md-6 mt-3">
+					<label class="fs-6 text-secondary">Enter Appartment/house</label><br>
+					<input type="text" class="form-control" value="" name="appartment_house">
+				</div>
+				<div class="col-md-6 mt-3">
+					<label class="fs-6 text-secondary">Enter Landmark</label><br>
+					<input type="text" class="form-control" value="" name="landmark" >
+				</div>
+				<div class="col-md-6 mt-3">
+					<label class="fs-6 text-secondary">Enter Area</label><br>
+					<input type="text" class="form-control" value="" name="area" >
+				</div>
+                <div class="col-md-6 mt-3">
+					<label class="fs-6 text-secondary">Enter City</label><br>
+					<input type="text" class="form-control" value="" name="city_village" id="city_village" >
+				</div>
+                <div class="col-md-6 mt-3">
+					<label class="fs-6 text-secondary">Enter Pincode</label><br>
+					<input type="number" class="form-control" value="" name="pincode" id="pincode" >
+				</div>
+				<div class="col-md-6 mt-3">
+					<label class="fs-6 text-secondary">Enter Dist</label><br>
+					<input type="text" class="form-control" value="" name="dist" id="dist" >
+				</div>
+				<div class="col-md-6 mt-3">
+					<label class="fs-6 text-secondary">Enter State</label><br>
+					<input type="text" class="form-control" value="" name="state" id="state" >
+				</div>
+				<div class="col-md-6 mt-3">
+					<label class="fs-6 text-secondary">Enter Country</label><br>
+					<input type="text" class="form-control" value="" name="country" id="country" >
+				</div>
+                <div class="col-6 mt-5 text-start">
+                    <button class="btn btn-outline-primary ps-3 pe-3 fw-bold" type="button" id="prev_btn">Back</button>
+                </div>
+                <div class="col-6 mt-5 text-end">
+                    <button class="btn btn-outline-success ps-3 pe-3 fw-bold">Save</button>
+                </div>
+			</div>
+		</div>
+        <div class="col-md-6">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120638.05486155902!2d74.74267340000002!3d19.1103224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdcb05d46788921%3A0x6677e92c1a5181b6!2sAhmednagar%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1679081863259!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div id="my_div"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(
+        () =>{
+            $("#pincode").blur(function(){
+                const pin = $("#pincode").val();
+                $.ajax(
+                    {
+                        url:'https://api.postalpincode.in/pincode/'+pin,
+                        dataType:'json'
+                    }
+                ).done(
+                    function(res){
+                        data = res[0].PostOffice[0];
+                        // $("#city_village").val(data.Block);
+                        $("#dist").val(data.District);
+                        $("#state").val(data.State);
+                        $("#country").val(data.Country);
+                        console.log(res[0].PostOffice);
+                    }
+                ).fail(
+                    function(err){
+                        console.log(err);
+                });
+            });
+
+            var check=1;
+            $("#next_btn").click(function(){
+                rent = $('#rent').val();
+                deposit = $('#deposit').val();
+                electricity = $('#electricity').val();
+                available_from = $('#available_from').val();
+                // (rent.length<3 || deposit.length<3 || electricity.length>2 || available_from=='')?alert("Please, Fill appropriate information..."):show();
+                    show();
+            })
+            $("#prev_btn").click(show);
+            function show(){
+                form1 = document.getElementById("form1");
+                form2 = document.getElementById("form2");
+                if(check){
+                    form2.style.display='block';
+                    form1.style.display='none';
+                    check=0;
+                }
+                else{
+                    form2.style.display='none';
+                    form1.style.display='block';
+                    check=1;
+                }
+            }
+            
+        }
+    );
+
+
+</script>
+</form>
+<%- include("footer.ejs") %>
